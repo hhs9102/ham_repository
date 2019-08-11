@@ -1,4 +1,4 @@
-package com.example.ham_springboot;
+package me.ham.circuitbreaker;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;

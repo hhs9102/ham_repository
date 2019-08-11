@@ -1,4 +1,4 @@
-package com.example.ham_springboot;
+package me.ham.main;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
