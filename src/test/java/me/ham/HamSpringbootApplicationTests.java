@@ -1,4 +1,4 @@
-package me.ham.main;
+package me.ham;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
