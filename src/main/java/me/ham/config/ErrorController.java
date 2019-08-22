@@ -2,7 +2,6 @@ package me.ham.config;
 
 import me.ham.config.exception.AppError;
 import me.ham.config.exception.SampleException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
