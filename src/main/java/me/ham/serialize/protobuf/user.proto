@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+package me.ham.protobuf;
+
+option java_package = "me.ham.serialize.protobuf";
+option java_outer_classname ="UserProto";
+
+message User{
+	required string name = 1;
+	required int32 age = 2;
+}
+
+
