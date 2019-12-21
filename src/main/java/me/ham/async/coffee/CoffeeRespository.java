@@ -1,7 +1,6 @@
 package me.ham.async.coffee;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;

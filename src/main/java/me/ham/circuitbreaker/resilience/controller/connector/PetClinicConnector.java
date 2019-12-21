@@ -13,11 +13,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 
-@CircuitBreaker(name="petclinic")
-@Retry(name="petclinic")
-@RateLimiter(name="petclinic")
 @Slf4j
 @Component
+@CircuitBreaker(name = "petclinic")
 public class PetClinicConnector implements Connector {
 
     private final String PET_CLINIC_URL = "http://localhost:8080/";

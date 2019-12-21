@@ -1,4 +1,4 @@
-package me.ham.circuitbreaker;
+package me.ham.circuitbreaker.hystrix;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
@@ -6,19 +6,21 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @EnableCircuitBreaker
 @RestController
-public class RequestForCircuitBreakerController {
+@RequestMapping("/hystrix")
+public class CircuitBreakerController {
 
     @GetMapping("/consumer")
     @HystrixCommand(fallbackMethod = "fallback" ,commandProperties = {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "4000") //요청 대기 시간
             ,@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5") //최소 요청 건수
-            ,@HystrixProperty(name = "- circuitBreaker.sleepWindowInMilliseconds", value = "5000") //서킷브레이커 지속시간
+//            ,@HystrixProperty(name = "- circuitBreaker.sleepWindowInMilliseconds", value = "5000") //서킷브레이커 지속시간
     })
     public String Consumer(@RequestParam String path){
         System.out.println("log :: "+path);

@@ -13,12 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.time.Duration;
-import java.util.concurrent.TimeoutException;
 import java.util.function.Supplier;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 
 @RestController
 @RequestMapping("/resilience")
@@ -26,57 +21,46 @@ public class RCircuitBreakerController {
 
     Logger logger = LoggerFactory.getLogger(RCircuitBreakerController.class);
 
-    //@Autowired
+    @Autowired
     PetClinicConnector petClinicConnector;
 
+    private final String PET_CLINIC_PATH = "http://localhost:8080/connect/";
+
     @GetMapping("/consumer")
-    public String Consumer(@RequestParam String path){
-        // Create a custom configuration for a CircuitBreaker
-        CircuitBreakerConfig circuitBreakerConfig = CircuitBreakerConfig.custom()
-                .failureRateThreshold(50)
-                .waitDurationInOpenState(Duration.ofSeconds(100))
-                .ringBufferSizeInHalfOpenState(2)
-                .ringBufferSizeInClosedState(2)
-                .recordExceptions(IOException.class, TimeoutException.class)
-                .build();
+    public String consumer(@RequestParam String path) throws Exception {
+        CircuitBreakerConfig circuitBreakerConfig = CircuitBreakerConfig.ofDefaults();
         CircuitBreakerRegistry circuitBreakerRegistry = CircuitBreakerRegistry.of(circuitBreakerConfig);
         CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker("hsham");
-
         Supplier<String> decoratedSupplier = CircuitBreaker
                 .decorateSupplier(circuitBreaker, ()->callApi(path));
 
-        circuitBreaker.getEventPublisher()
-                .onSuccess(event -> logger.info("onSuccess is called"))
-                .onError(event -> logger.info("onError is called"))
-                .onIgnoredError(event -> logger.info("onIgnoredError is called"))
-                .onReset(event -> logger.info("onReset is called"))
-                .onStateTransition(event -> logger.info("onStateTransition is called"));
-
         String result = Try.ofSupplier(decoratedSupplier)
                 .recover(throwable -> {
-                    System.out.println("fallback called!!!!!!!!!!");
+                    System.out.println("fallback called!!!!!!!!!");
                     return "Hello from Recovery";
                 }).get();
-        logger.info("result : "+result);
+        logger.info("consumer result :: "+result);
+
+        circuitBreaker.executeCallable(this::sucess);
         return result;
     }
 
     private String callApi(String path){
-        System.out.println("log :: "+path);
+        logger.info("call path :: " + path);
 
-        ResponseEntity<String> entity = new RestTemplate().getForEntity("http://localhost:8080/" + path, String.class);
+        ResponseEntity<String> entity = new RestTemplate().getForEntity(PET_CLINIC_PATH + path, String.class);
         if(entity.getStatusCode() == HttpStatus.OK){
-            System.out.println("result :: "+entity.getBody());
+            logger.info("result :: "+entity.getBody());
             return entity.getBody();
         }else{
-            System.out.println("HttpStatus is not OK");
-        }
+            logger.info("HttpStatus is not OK");
+    }
 
         throw new RuntimeException("supplier is not OK");
     }
 
     private String fallback(String path){
-        System.out.println("called fallback method");
+        logger.info("called fallback method");
         return "hello fallback";
     }
 

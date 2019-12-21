@@ -1,6 +1,9 @@
-package me.ham.async.coffee;
+package me.ham.async;
 
 import lombok.extern.slf4j.Slf4j;
+import me.ham.async.coffee.CoffeeComponent;
+import me.ham.async.coffee.CoffeeRespository;
+import me.ham.async.coffee.TaskConfig;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,16 +12,14 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.naming.Name;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executors;
 
 @Slf4j
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes =
         {CoffeeComponent.class
-        ,CoffeeRespository.class
-        ,TaskConfig.class}
+        , CoffeeRespository.class
+        , TaskConfig.class}
         )
 public class CoffeeComponentTest {
 
