@@ -1,6 +1,8 @@
 package me.ham.user;
 
 
+import me.ham.user.model.User;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,4 +57,14 @@ public class UserControllerTest {
                 .andExpect(xpath("/User/username").string("hosik"))
                 .andExpect(xpath("/User/password").string("1234"));
     }
+
+    @Test
+    public void builderTest(){
+        User user = User.builder()
+                .name("hosik")
+                .age(29)
+                .build();
+        Assert.assertEquals(29, user.getAge());
+        Assert.assertEquals("hosik", user.getName());
+}
 }
