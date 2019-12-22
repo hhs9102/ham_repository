@@ -8,8 +8,6 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-
 @Component
 public class TestRunner implements ApplicationRunner {
 
@@ -40,11 +38,11 @@ public class TestRunner implements ApplicationRunner {
 //        System.out.println(stopWatch.prettyPrint());
 
         String[] beans = applicationContext.getBeanDefinitionNames();
-            Arrays.sort(beans);
+//            Arrays.sort(beans);
             for(String bean : beans){
-            if(bean.toUpperCase().indexOf("CIRCUITBREAKER") > -1){
+//            if(bean.toUpperCase().indexOf("CIRCUITBREAKER") > -1){
                 System.out.println(bean);
-            }
+//            }
         }
     }
 

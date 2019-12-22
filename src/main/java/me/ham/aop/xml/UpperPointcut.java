@@ -1,7 +1,6 @@
-package me.ham.aop;
+package me.ham.aop.xml;
 
 import org.springframework.aop.support.NameMatchMethodPointcut;
-import org.springframework.stereotype.Component;
 
 public class UpperPointcut extends NameMatchMethodPointcut {
 }

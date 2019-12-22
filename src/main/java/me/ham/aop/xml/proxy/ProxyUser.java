@@ -1,8 +1,7 @@
-package me.ham.aop.proxy;
+package me.ham.aop.xml.proxy;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
