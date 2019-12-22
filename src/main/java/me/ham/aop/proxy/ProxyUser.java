@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
-@Component
 public class ProxyUser {
     private String username;
 }
