@@ -1,9 +1,7 @@
 package me.ham.aop.annotation;
 
-import me.ham.aop.annotation.proxy.ProxyUserInterface;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.springframework.aop.Pointcut;
-import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.NameMatchMethodPointcut;
@@ -42,12 +40,13 @@ public class ProxyConfiguration {
         return new DefaultPointcutAdvisor(upperPointcutByConfiguration, upperAdviceByConfiguration) ;
     }
 
-    @Bean
+//    @Bean
     //프록시 팩토리빈 등록
-    public ProxyFactoryBean proxyFactoryBean(){
-        ProxyFactoryBean proxyFactoryBean = new ProxyFactoryBean();
-        proxyFactoryBean.setTargetClass(ProxyUserInterface.class);
-        proxyFactoryBean.setInterceptorNames("upperAdvisorByConfiguration");
-        return proxyFactoryBean;
-    }
+//    public ProxyFactoryBean proxyFactoryBean(ApplicationContext applicationContext){
+//        Object proxyUserByAnnotation = applicationContext.getBean("proxyUserByAnnotation");
+//        ProxyFactoryBean proxyFactoryBean = new ProxyFactoryBean();
+//        proxyFactoryBean.setTarget(proxyUserByAnnotation);
+//        proxyFactoryBean.setInterceptorNames(new String[]{"upperAdvisorByConfiguration"});
+//        return proxyFactoryBean;
+//    }
 }
