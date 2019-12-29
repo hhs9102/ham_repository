@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.ham.user.UserMapper">
+    <insert id="createUser">
+        INSERT INTO USER(ID, LEVEL, LOGIN_CNT, NAME, RECOMMEND_CNT ) VALUES(#{id}, 'SILVER', 3, #{username}, 10)
+    </insert>
+</mapper>

@@ -114,11 +114,11 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-spring -->
-        <dependency>
+        <!--<dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-spring</artifactId>
             <version>0.17.0</version>
-        </dependency>
+        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-spring-boot2 -->
         <dependency>
@@ -126,7 +126,6 @@
             <artifactId>resilience4j-spring-boot2</artifactId>
             <version>0.17.0</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -142,6 +141,27 @@
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
             <version>3.8.0</version>
+        </dependency>
+
+
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.0.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.ibatis/ibatis-core -->
+        <dependency>
+            <groupId>org.apache.ibatis</groupId>
+            <artifactId>ibatis-core</artifactId>
+            <version>3.0</version>
         </dependency>
 
 
@@ -174,12 +194,6 @@
             <artifactId>jquery</artifactId>
             <version>3.4.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.webjars.bower/jquery -->
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>jquery</artifactId>
-            <version>3.4.1</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator-core -->
         <dependency>
             <groupId>org.webjars</groupId>
@@ -204,13 +218,12 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <version>1.4.192</version>
         </dependency>
-
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 
