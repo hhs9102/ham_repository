@@ -4,7 +4,6 @@ import me.ham.user.User;
 import me.ham.user.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -13,7 +12,7 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     @Override
-    @Transactional(readOnly = true)
+//    @Transactional(readOnly = true)
     public void createUser(User user) {
         userDao.createUser(user);
     }

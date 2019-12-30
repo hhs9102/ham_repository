@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestController
 public class UserController {
 
@@ -21,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping("/users/create")
-    public  User create(@RequestBody User user, HttpServletRequest httpServletRequest){
+    public  User create(@RequestBody User user){
         userService.createUser(user);
         return user;
     }

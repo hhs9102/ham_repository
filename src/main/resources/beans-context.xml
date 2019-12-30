@@ -16,7 +16,6 @@
     <bean id="proxyUser" class="me.ham.aop.xml.proxy.ProxyUser">
         <property name="username" value="hamhosik"></property>
     </bean>
-
     <bean class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="target" ref="proxyUser"></property>
         <property name="interceptorNames">
@@ -25,21 +24,16 @@
             </list>
         </property>
     </bean>
-
     <bean id="upperAdvice" class="me.ham.aop.xml.UpperAdvice">
     </bean>
 
-    <bean id="upperAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
-        <property name="advice" ref="upperAdvice"></property>
-        <property name="pointcut" ref="upperPointcut"></property>
-    </bean>
-
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="datasource"></property>
+        <property name="dataSource" ref="dataSource"></property>
     </bean>
 
     <aop:config >
-        <aop:advisor advice-ref="transactionAdvice" pointcut="bean(*Test)"/>
+<!--        <aop:advisor advice-ref="transactionAdvice" pointcut="execution(* me.ham.user.*.*(..))"/>-->
+        <aop:advisor advice-ref="transactionAdvice" pointcut="bean(userService))"/>
     </aop:config>
 
 
@@ -47,12 +41,8 @@
         <property name="transactionManager" ref="transactionManager"></property>
         <property name="transactionAttributes">
             <props>
-                <prop key="get*">PROPAGATION_REQUIRED, readOnly</prop>
-                <prop key="*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_NEVER</prop>
             </props>
         </property>
-    </bean>
-
-    <bean id="datasource" class="com.zaxxer.hikari.HikariDataSource">
     </bean>
 </beans>
