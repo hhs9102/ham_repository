@@ -5,19 +5,21 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 
 @Repository
+@Transactional
 public class UserDaoImpl implements UserDao{
 
     private final String NAMESPACE = "me.ham.user.UserMapper.";
 
     @Autowired
-    SqlSession sqlSession;
+    private SqlSession sqlSession;
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     @Override
     public void createUser(User user) {
@@ -61,5 +63,6 @@ public class UserDaoImpl implements UserDao{
         System.out.println("createUserNever");
         jdbcTemplate.update(sql);
     }
+
 }
 
