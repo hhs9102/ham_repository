@@ -32,8 +32,8 @@
     </bean>
 
     <aop:config >
-<!--        <aop:advisor advice-ref="transactionAdvice" pointcut="execution(* me.ham.user.*.*(..))"/>-->
-        <aop:advisor advice-ref="transactionAdvice" pointcut="bean(userService))"/>
+        <aop:advisor advice-ref="transactionAdvice" pointcut="execution(* me.ham.user.dao..*(..))"/>
+        <!--<aop:advisor advice-ref="transactionAdvice" pointcut="bean(userDaoImpl)"/>-->
     </aop:config>
 
 
@@ -41,7 +41,9 @@
         <property name="transactionManager" ref="transactionManager"></property>
         <property name="transactionAttributes">
             <props>
-                <prop key="*">PROPAGATION_NEVER</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+                <prop key="*Never">PROPAGATION_NEVER, readOnly</prop>
+                <prop key="*ReadOnly">PROPAGATION_REQUIRES_NEW, readOnly</prop>
             </props>
         </property>
     </bean>

@@ -5,6 +5,6 @@
 
 <mapper namespace="me.ham.user.UserMapper">
     <insert id="createUser">
-        INSERT INTO USER(ID, LEVEL, LOGIN_CNT, NAME, RECOMMEND_CNT ) VALUES(#{id}, 'SILVER', 3, #{username}, 10)
+        INSERT INTO USER(ID, LEVEL, LOGIN_CNT, NAME, RECOMMEND_CNT ) VALUES((SELECT HIBERNATE_SEQUENCE.NEXTVAL FROM DUAL), 'SILVER', 3, 'TEST', 10)
     </insert>
 </mapper>
