@@ -4,6 +4,8 @@ import me.ham.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -17,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public  User create(@RequestBody User user){
+    public  User create(@RequestBody User user) throws IOException {
         userService.createUser(user);
         return user;
     }

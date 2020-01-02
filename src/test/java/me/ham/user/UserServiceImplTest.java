@@ -1,31 +1,39 @@
 package me.ham.user;
 
-import me.ham.user.dao.UserDaoImpl;
+import me.ham.user.dao.UserDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.IllegalTransactionStateException;
+import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest(classes = UserDaoImpl.class)
-@RunWith(SpringRunner.class)
-@ContextConfiguration(locations = "classpath:beans-context.xml")
+import java.io.IOException;
+
+@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
 public class UserServiceImplTest {
 
     @Autowired
-    ApplicationContext applicationContext;
-
-    @Autowired
-    UserDaoImpl userDao;
+    UserDao userDao;
 
     @Test
-    public void getUser(){
+    //TODO RuntimeException으로 롤백되는것 확인
+    public void createJdbcUser(){
         User user = new User();
-//        UserDao userDao = Mockito.mock(UserDao.class);
-//        doNothing().when(userDao).createUser(user);
+        userDao.createJdbcUser(new User());
+    }
+    @Test
+    //TODO CheckedExcpetion으로 롤백되지 않는것 확인
+    public void createUser() throws IOException {
+        User user = new User();
         userDao.createUser(new User());
     }
-
+    @Test(expected = IllegalTransactionStateException.class)
+    @Transactional
+    public void createUserNever() {
+        User user = new User();
+        userDao.createUserNever(new User());
+    }
 }
