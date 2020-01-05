@@ -1,7 +1,8 @@
 package me.ham.user;
 
-import me.ham.user.dao.UserDao;
+import me.ham.user.service.UserService;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,30 +11,57 @@ import org.springframework.transaction.IllegalTransactionStateException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserServiceImplTest {
 
     @Autowired
-    UserDao userDao;
+    UserService userService;
 
     @Test
-    //TODO RuntimeException으로 롤백되는것 확인
-    public void createJdbcUser(){
+    @DisplayName("RuntimeException으로 롤백되는것 확인")
+    public void createUserRuntimeException(){
         User user = new User();
-        userDao.createJdbcUser(new User());
+        String username = "testUsername";
+        user.setUsername(username);
+        user.setPassword("password");
+
+        try{
+            userService.createUserRuntimeException(user);
+        }catch (RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+
+        List<User> findedUsers = userService.findUserByUsername(username);
+        assertTrue(findedUsers.size()==0);
     }
     @Test
-    //TODO CheckedExcpetion으로 롤백되지 않는것 확인
-    public void createUser() throws IOException {
+    @DisplayName("CheckedExcpetion으로 롤백되지 않는것 확인")
+    public void createUserCheckedException() throws IOException {
         User user = new User();
-        userDao.createUser(new User());
+        String username = "insertUsername";
+        user.setUsername(username);
+        user.setPassword("password");
+
+        try{
+            userService.createUserCheckedException(user);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        List<User> findedUsers = userService.findUserByUsername(username);
+        assertTrue(findedUsers.size()>0);
     }
+
     @Test(expected = IllegalTransactionStateException.class)
     @Transactional
+    @DisplayName("Propogation이 NEVER로 설정")
     public void createUserNever() {
         User user = new User();
-        userDao.createUserNever(new User());
+        userService.createUserNever(new User());
     }
 }

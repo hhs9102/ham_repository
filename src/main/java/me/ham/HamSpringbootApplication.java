@@ -12,5 +12,5 @@ import org.springframework.context.annotation.ImportResource;
 public class HamSpringbootApplication {
     public static void main(String[] args) throws LifecycleException {
         SpringApplication.run(HamSpringbootApplication.class, args);
-    }
+}
 }
