@@ -13,5 +13,6 @@ public interface UserService {
     void createUserRuntimeException(User user);
     User findUserById(Integer id);
     List<User> findUserByUsername(String username);
+    List<User> findUserFromTextFile();
 
 }

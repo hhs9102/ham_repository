@@ -54,4 +54,9 @@ public class UserController {
     public List<User> findUserById(@PathVariable String username){
         return userService.findUserByUsername(username);
     }
+
+    @GetMapping("/file")
+    public List<User> findUserFromTextFile(){
+        return userService.findUserFromTextFile();
+    }
 }

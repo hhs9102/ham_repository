@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
+import java.io.*;
+import java.util.Collections;
 import java.util.List;
 
 @Service(value = "userService")
@@ -48,5 +49,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findUserByUsername(String username) {
         return userDao.findUserByUsername(username);
+    }
+
+    @Override
+    public List<User> findUserFromTextFile() {
+        File file = new File("/Users/hamhosik/IdeaProjects/ham_springboot/src/main/resources/text.txt");
+        try (FileReader fileReader = new FileReader(file);
+             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            String key = bufferedReader.readLine();
+            return userDao.findUserByUsername(key);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
     }
 }

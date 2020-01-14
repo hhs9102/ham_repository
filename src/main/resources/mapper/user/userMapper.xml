@@ -17,6 +17,6 @@
           FROM USER
          WHERE 1=1
          <bind name="name" value="'%' + username + '%'"/>
-           AND USERNAME LIKE #{name}
+          AND USERNAME LIKE #{name}
     </select>
 </mapper>
