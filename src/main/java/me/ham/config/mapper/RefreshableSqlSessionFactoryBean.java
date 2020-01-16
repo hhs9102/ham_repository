@@ -60,6 +60,7 @@ public class RefreshableSqlSessionFactoryBean extends SqlSessionFactoryBean impl
     /**
      * 싱글톤 멤버로 SqlMapClient 원본 대신 프록시로 설정하도록 오버라이드.
      */
+    @Override
     public void afterPropertiesSet() throws Exception {
         super.afterPropertiesSet();
         setRefreshable();
@@ -96,7 +97,7 @@ public class RefreshableSqlSessionFactoryBean extends SqlSessionFactoryBean impl
                 }
                 return retVal;
             }
-//1579005095000
+
             private boolean findModifiedResource(Resource resource) {
                 System.out.println("current checking resource name ::::"+resource.getFilename());
                 boolean retVal = false;

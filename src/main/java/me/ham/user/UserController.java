@@ -19,27 +19,27 @@ public class UserController {
         return "hello";
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public  User create(@RequestBody User user) throws IOException {
         userService.createUser(user);
         return user;
     }
-    @PostMapping("/create/never")
+    @PostMapping("/never")
     public  User createUserNever(@RequestBody User user){
         userService.createUserNever(user);
         return user;
     }
-    @PostMapping("/create/readonly")
+    @PostMapping("/readonly")
     public  User createUserReadOnly(@RequestBody User user){
         userService.createUserReadOnly(user);
         return user;
     }
-    @PostMapping("/create/checked")
+    @PostMapping("/checked")
     public  User createUserCheckedException(@RequestBody User user) throws IOException {
         userService.createUserCheckedException(user);
         return user;
     }
-    @PostMapping("/create/runtime")
+    @PostMapping("/runtime")
     public  User createUserRuntimeException(@RequestBody User user){
         userService.createUserRuntimeException(user);
         return user;
