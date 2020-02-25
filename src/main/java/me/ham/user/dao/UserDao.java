@@ -13,4 +13,5 @@ public interface UserDao {
     void createUserRuntimeException(User user);
     User findUserById(Integer id);
     List<User> findUserByUsername(String username);
+    List<User> findAllUser();
 }

@@ -5,7 +5,7 @@
 
 <mapper namespace="me.ham.user.UserMapper">
     <insert id="createUser">
-        INSERT INTO USER(ID,  USERNAME, PASSWORD ) VALUES((SELECT HIBERNATE_SEQUENCE.NEXTVAL FROM DUAL), #{username}, #{password})
+        INSERT INTO USER(ID,  USERNAME, PASSWORD ) VALUES(#{id}, #{username}, #{password})
     </insert>
     <select id="findUserById" resultType="me.ham.user.User">
         SELECT *
@@ -18,5 +18,10 @@
          WHERE 1=1
          <bind name="name" value="'%' + username + '%'"/>
           AND USERNAME LIKE #{name}
+    </select>
+
+    <select id="findAllUser" resultType="me.ham.user.User">
+        SELECT *
+          FROM USER
     </select>
 </mapper>

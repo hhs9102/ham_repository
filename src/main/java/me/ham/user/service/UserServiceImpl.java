@@ -65,4 +65,11 @@ public class UserServiceImpl implements UserService {
         }
         return Collections.emptyList();
     }
+
+    @Override
+    public List<User> findAllUser() {
+        return userDao.findAllUser();
+    }
+
+
 }

@@ -14,5 +14,5 @@ public interface UserService {
     User findUserById(Integer id);
     List<User> findUserByUsername(String username);
     List<User> findUserFromTextFile();
-
+    List<User> findAllUser();
 }

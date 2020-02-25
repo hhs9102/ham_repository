@@ -3,9 +3,6 @@ package me.ham.user.dao;
 import me.ham.user.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
@@ -13,13 +10,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-@Repository(value = "userDao")
-public class UserDaoImpl implements UserDao{
+@Repository(value = "userDao2")
+public class UserDaoImpl2 implements UserDao{
 
     private final String NAMESPACE = "me.ham.user.UserMapper.";
-
-    @Autowired
-    ApplicationContext applicationContext;
 
     @Autowired
     private SqlSession sqlSession;
@@ -30,7 +24,6 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     //Checked Exception(IOException) 발생 -> insert commit됨.(rollback되지 않음)
-    @CacheEvict(value = "user", allEntries = true)
     public void createUser(User user) {
         sqlSession.insert(NAMESPACE+"createUser", user);
     }
@@ -68,9 +61,8 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    @Cacheable(value = "user")
     public List<User> findAllUser() {
-        return sqlSession.selectList(NAMESPACE+"findAllUser");
+        return null;
     }
 }
 
