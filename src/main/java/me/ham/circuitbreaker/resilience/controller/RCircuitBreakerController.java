@@ -73,8 +73,11 @@ public class RCircuitBreakerController {
         return petClinicConnector.failure();
     }
     @GetMapping(value = "/waitting/{ms}")
-    public String waitting(@PathVariable("ms") long ms){
-        return petClinicConnector.waitting(ms);
+    public String waitting(@PathVariable("ms") long ms) throws InterruptedException {
+//        return petClinicConnector.waitting(ms);
+        System.out.println(String.format("waitting %dms request called ", ms));
+        Thread.sleep(ms);
+        return String.format("%d ms 후 리턴", ms);
     }
 
     @GetMapping(value = "/configure/waitting/{ms}")
