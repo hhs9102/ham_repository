@@ -34,7 +34,7 @@ public class ValidationController {
     }
 
     @GetMapping("/basic")
-    public ResponseEntity<?> validation(@RequestBody @Valid ValidationRequest request){
+    public ResponseEntity<?> validation(@RequestBody(required = false) @Valid ValidationRequest request){
         return ResponseEntity.ok().build();
     }
 }
