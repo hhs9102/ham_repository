@@ -11,16 +11,17 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class JsonConverter{
+    private static final String LOCAL_DATE_TIME_FORMAT = "yyyy-MM-dd kk:mm:ss";
+
     private JsonConverter(){
     }
     public static class LocalDateTimeDeserialize extends JsonDeserializer<LocalDateTime> {
-        private final String format = "yyyy-MM-dd kk:mm:ss";
         @Override
         public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-            return LocalDateTime.parse(p.getValueAsString(), DateTimeFormatter.ofPattern(format));
+            return LocalDateTime.parse(p.getValueAsString(), DateTimeFormatter.ofPattern(LOCAL_DATE_TIME_FORMAT));
         }
-    }
 
+    }
     public static class LocalTimeDeserialize extends JsonDeserializer<LocalTime> {
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("h:mm a");
         @Override
@@ -28,5 +29,6 @@ public class JsonConverter{
             String value = p.getValueAsString();
             return LocalTime.parse(value, FORMATTER);
         }
+
     }
 }

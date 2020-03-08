@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -44,6 +45,7 @@ public class ValidationRequestTest {
         mockMvc.perform(get("/validation/basic")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(body))
-                    .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                    .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                    .andDo(print());
     }
 }
