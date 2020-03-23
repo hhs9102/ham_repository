@@ -57,6 +57,14 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- MQ -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit -->
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+        </dependency>
+
+
         <!--Circuit Breaker Start-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
