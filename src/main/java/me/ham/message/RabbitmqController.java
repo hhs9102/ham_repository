@@ -22,4 +22,10 @@ public class RabbitmqController {
         rabbitmqProducer.sendToMessageQueue(name);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping(value = "/rabbit/person/{name}")
+    public ResponseEntity<Void> sendPersonToMessageQueue(@PathVariable String name){
+        rabbitmqProducer.sendPersonToMessageQueue(name);
+        return ResponseEntity.ok().build();
+    }
 }
